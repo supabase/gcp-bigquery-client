@@ -1,9 +1,35 @@
-GCP BigQuery Client
-===================
+# Supabase fork of GCP BigQuery Client
 
-[<img alt="github" src="https://img.shields.io/badge/github-lquerel/gcp_bigquery_client-8da0cb?style=for-the-badge&labelColor=555555&logo=github" height="20">](https://github.com/lquerel/gcp-bigquery-client)
+[<img alt="github" src="https://img.shields.io/badge/github-supabase/gcp_bigquery_client-8da0cb?style=for-the-badge&labelColor=555555&logo=github" height="20">](https://github.com/supabase/gcp-bigquery-client)
 [<img alt="crates.io" src="https://img.shields.io/crates/v/gcp_bigquery_client.svg?style=for-the-badge&color=fc8d62&logo=rust" height="20">](https://crates.io/crates/gcp-bigquery-client)
 [<img alt="docs.rs" src="https://img.shields.io/badge/docs.rs-gcp_bigquery_client-66c2a5?style=for-the-badge&labelColor=555555&logoColor=white&logo=data:image/svg+xml;base64,PHN2ZyByb2xlPSJpbWciIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDUxMiA1MTIiPjxwYXRoIGZpbGw9IiNmNWY1ZjUiIGQ9Ik00ODguNiAyNTAuMkwzOTIgMjE0VjEwNS41YzAtMTUtOS4zLTI4LjQtMjMuNC0zMy43bC0xMDAtMzcuNWMtOC4xLTMuMS0xNy4xLTMuMS0yNS4zIDBsLTEwMCAzNy41Yy0xNC4xIDUuMy0yMy40IDE4LjctMjMuNCAzMy43VjIxNGwtOTYuNiAzNi4yQzkuMyAyNTUuNSAwIDI2OC45IDAgMjgzLjlWMzk0YzAgMTMuNiA3LjcgMjYuMSAxOS45IDMyLjJsMTAwIDUwYzEwLjEgNS4xIDIyLjEgNS4xIDMyLjIgMGwxMDMuOS01MiAxMDMuOSA1MmMxMC4xIDUuMSAyMi4xIDUuMSAzMi4yIDBsMTAwLTUwYzEyLjItNi4xIDE5LjktMTguNiAxOS45LTMyLjJWMjgzLjljMC0xNS05LjMtMjguNC0yMy40LTMzLjd6TTM1OCAyMTQuOGwtODUgMzEuOXYtNjguMmw4NS0zN3Y3My4zek0xNTQgMTA0LjFsMTAyLTM4LjIgMTAyIDM4LjJ2LjZsLTEwMiA0MS40LTEwMi00MS40di0uNnptODQgMjkxLjFsLTg1IDQyLjV2LTc5LjFsODUtMzguOHY3NS40em0wLTExMmwtMTAyIDQxLjQtMTAyLTQxLjR2LS42bDEwMi0zOC4yIDEwMiAzOC4ydi42em0yNDAgMTEybC04NSA0Mi41di03OS4xbDg1LTM4Ljh2NzUuNHptMC0xMTJsLTEwMiA0MS40LTEwMi00MS40di0uNmwxMDItMzguMiAxMDIgMzguMnYuNnoiPjwvcGF0aD48L3N2Zz4K" height="20">](https://docs.rs/gcp-bigquery-client)
+
+This repository is Supabase's fork of the upstream
+[GCP BigQuery Client for Rust].
+
+## Why this fork exists
+
+Supabase maintains this fork to carry targeted changes required by
+[Supabase ETL] when the behavior we need is not yet available in an upstream
+revision we can consume. These changes primarily concern the BigQuery Storage
+Write API, including append batching and concurrency, retry and connection
+handling, request-size and byte accounting, and flexible column names.
+
+The fork should remain narrowly focused: custom changes should be documented
+and tested, and suitable fixes should still be contributed upstream whenever
+practical.
+
+The repository lineage is:
+
+```text
+lquerel/gcp-bigquery-client
+            ↓
+supabase/gcp-bigquery-client
+```
+
+Supabase consumers should pin an exact commit from this repository. The
+crates.io package and docs.rs documentation linked above describe upstream
+releases and may not include Supabase-specific changes.
 
 An ergonomic Rust async client library for GCP BigQuery.
 * Support all BigQuery API endpoints (not all covered by unit tests yet)
@@ -20,11 +46,32 @@ Features:
 - rust-tls (default): RUSTLS-based
 - native-tls: OpenSSL-based
 
+## Maintaining the fork
+
+Open changes against this repository when they are required by Supabase ETL
+and cannot be consumed from upstream. Keep patches focused and include tests
+for behavioral changes.
+
+To incorporate the latest upstream changes:
+
+```shell
+git clone https://github.com/supabase/gcp-bigquery-client.git
+cd gcp-bigquery-client
+git remote add upstream https://github.com/lquerel/gcp-bigquery-client.git
+git fetch upstream
+git checkout main
+git checkout -b integrate-upstream
+git merge upstream/main
+# Resolve any conflicts, then open a PR against supabase/gcp-bigquery-client.
+```
 
 <br>
 Contributions are welcome.
 <br>
 Please post your suggestions and ideas on this GitHub [discussion section](https://github.com/lquerel/gcp-bigquery-client/discussions).
+
+[GCP BigQuery Client for Rust]: https://github.com/lquerel/gcp-bigquery-client
+[Supabase ETL]: https://github.com/supabase/etl
 
 ---
 
